@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Task 1: Weather Data</title>
+</head>
+
+<body>
+
+    <h2>Fetch Weather Data by Location</h2>
+
+    <form onsubmit="return false;">
+        <label for="city">Enter a location to obtain weather information from:</label>
+        <input type="text" name="city" id="city" value="Memphis">
+
+        <input type="submit">Obtain Data</button>
+    </form>
+
+    <p>5-Day Weather Forecast from <span id="location"></span></p>
+    <img src="" alt="">
+
+    <script>
+        document.addEventListener("submit", async function fetchWeatherData() {
+            const city = document.getElementById("city")
+            const cityValue = city.value
+            console.log(cityValue)
+
+            // Use the link from the given API link used in the api webpage.
+            const requestURL = `http://api.weatherapi.com/v1/forecast.json?q=${cityValue}&days=5`
+
+
+            const data = await fetch(requestURL).then(response => response.json())
+
+
+        })
+    </script>
+</body>
+</html>

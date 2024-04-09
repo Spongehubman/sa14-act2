@@ -3,19 +3,59 @@
 
 <head>
     <title>SA-14, Act 2, Task 5</title>
+    <style>
+        /* div.moving{
+            position: relative;
+            animation-name: move;
+            animation-duration: 3s;
+        }
+
+        @keyframes move{
+            from{ left: 0px;}
+            to { left: 200px;}
+        }*/
+    </style>
 </head>
 
+
 <!-- This div block should move. -->
-<div>
+<div class="moving">
     <h2>Click the button below and see what it does!</h2>
 
-    <button type="submit">Animate!</button>
 </div>
 
-<script>
-    const move_element = document.getElementsByTagName("div")[0]
+<button type="submit">Animate!</button>
 
-    const button = document.getElementsbyTagName("button")[0]
-    button.addEventListener("click")
+<script>
+    const div_element = document.getElementsByTagName("div")[0]
+    let clicked
+    clicked = false
+    console.log(clicked)
+    const button = document.getElementsByTagName("button")[0]
+    button.addEventListener("click", (event) => {
+
+        event.preventDefault()
+        moveable = div_element.style.left
+
+        if (clicked == false) {
+            for (let x = 0; x <= 250; x++) {
+                div_element.style.left += x
+                console.log(x)
+                //console.log(clicked)
+                const clicked = true
+                console.log(clicked)
+            }
+        } else if (clicked == true) {
+            for (let x = 250; x >= 1; x--) {
+                div_element.style.left -= x
+                console.log(x)
+                //console.log(clicked)
+                const clicked = false
+                console.log(clicked)
+            }
+        }
+
+    })
+
 </script>
 </html>
