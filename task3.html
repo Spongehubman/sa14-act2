@@ -5,14 +5,19 @@
     </head>
 
     <body>
-        <form>
-            <input type="text" name="title">
-            <input type="text" name="task">
+        <h2>To Do List</h2>
+
+        <h5>Add a task to your list.</h5>
+        <form id="addForm">
+            <p>Task title:</p>
+            <input type="text" id="title" name="title"> <br>
+            <p>Description</p><br>
+            <input type="text" id="task" name="task"> <br>
+            <button type="submit" id="submitAdd" onClick="add">Add Task</button><br>
         </form>
 
+        <div id="output"></div>
 
-        <script>
-            
-        </script>
+        <script src="task3_script.js"></script>
     </body>
 </html>
