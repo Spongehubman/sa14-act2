@@ -2,8 +2,105 @@
 
 <html>
     <body>
+
+        <h2>Form Validation Test</h2>
+
+        <form id="form1">
+            <p id="nameError"></p>
+            <p>Username: </p>
+            <input type="text" id="username" name="username" required><br>
+
+            <p id="emailError"></p>
+            <p>Email: </p>
+            <input type="text" id="email" name="email" required><br>
+
+            <p id="passwordError"></p>
+            <p>Password: </p>
+            <input type="text" id="password" name="password" required><br>
+
+
+            <button id="submitButton" type="submit">Submit</button>
+        </form>
+
         <script>
             
+            document.getElementById("submitButton").addEventListener("click", execute)
+
+            function execute() {
+    
+                event.preventDefault()
+    
+                let name_OK = false
+                let email_OK = false
+                let password_OK = false
+                let caps_check = false
+                let number_check = false
+
+                let name_check = document.getElementById("username").value
+                let email_check = document.getElementById("email").value
+                let password_check = document.getElementById("password").value
+                const caps_array = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+                //const num_array = ["0","1","2","3","4","5","6","7","8","9"]
+
+
+                console.log(name_check, email_check, password_check)
+
+                if (name_check.length < 6) {
+                    //name_OK = false
+                    document.getElementById("nameError").innerHTML = "Your username is too short."
+                }   else    {
+                    document.getElementById("nameError").innerHTML = "Your username is valid."
+                    name_OK = true
+                }
+
+                if (email_check.length < 8) {
+                    //email_OK = false
+                    document.getElementById("emailError").innerHTML = "Your email is too short."
+                }   else    {
+                    
+                    let pattern = /[A-Za-z]+@(gmail|outlook).com/
+                    test_result = pattern.test(email_check)
+
+                    if (test_result == true) {
+                        email_OK = true
+                        document.getElementById("emailError").innerHTML = "Your email is valid."
+                    }   else    {
+                        document.getElementById("emailError").innerHTML = "Your email is in an invalid format."
+                    }
+                }
+
+                if (password_check.length < 8) {
+                    password_OK = false
+                    document.getElementById("passwordError").innerHTML = "Your password is too short."
+                }   else    {
+                    
+                    let patternNumber = /[0-9]/
+                    number_check = patternNumber.test(password_check)
+                    let patternCapital = /[A-Z]/
+                    caps_check = patternCapital.test(password_check)
+
+                    console.log("check of password regex", number_check)
+
+                    if (caps_check == true && number_check == true) {
+                        password_OK = true
+                        document.getElementById("passwordError").innerHTML = "Your password is valid."
+                    }   else if ((caps_check == true) && (number_check == false)) {
+                        document.getElementById("passwordError").innerHTML = "Your password needs at lease one numeric character."
+                    }   else if ((caps_check) == false && (number_check == true)) {
+                        document.getElementById("passwordError").innerHTML = "Your password needs at lease one capital letter character."
+                    }   else    {
+                        document.getElementById("passwordError").innerHTML = "Your password needs at lease one numeric character and one capital letter."
+                    }
+                }
+
+                if (name_OK == true && email_OK == true && password_OK == true) {
+                    console.log("Everything is valid.") // Just to make sure all is valid.
+                }
+
+
+            }
+
+
         </script>
     </body>
 </html>
