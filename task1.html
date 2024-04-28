@@ -9,28 +9,44 @@
 
     <h2>Fetch Weather Data by Location</h2>
 
-    <form onsubmit="return false;">
+    <form> <!--onsubmit="return false;"-->
         <label for="city">Enter a location to obtain weather information from:</label>
         <input type="text" name="city" id="city" value="Memphis">
 
-        <input type="submit">Obtain Data</button>
+        <button type="submit" id="submitButton">Obtain Data</button>
     </form>
 
-    <p>5-Day Weather Forecast from <span id="location"></span></p>
+    <p id="forecast">5-Day Weather Forecast from <span id="location"></span>:</p>
     <img src="" alt="">
+    <br>
+    <p id="date"></p>
+    <p id="time"></p>
 
     <script>
-        document.addEventListener("submit", async function fetchWeatherData() {
-            const city = document.getElementById("city")
-            const cityValue = city.value
+        document.getElementById("submitButton").addEventListener("click", async function fetchWeatherData() {
+            event.preventDefault()
+
+            const cityValue = document.getElementById("city").value
+            //const cityValue = city.value
             console.log(cityValue)
 
             // Use the link from the given API link used in the api webpage.
-            const requestURL = `http://api.weatherapi.com/v1/forecast.json?q=${cityValue}&days=5`
+            try {
+                event.preventDefault()
+                const requestURL = `https://api.weatherapi.com/v1/forecast.json?key=a2f9be3344f345938e230902242004&q=Memphis&days=5&aqi=no&alerts=no`
 
+                const data = await fetch(requestURL).then(response => response.json())
+                console.log(data)
 
-            const data = await fetch(requestURL).then(response => response.json())
+                document.getElementById("location").innerHTML = cityValue
 
+                const the_date = data.get("forecast".get("forecastday"[0].get("date")))
+                console.log(the_date)
+                document.getElementById("date").innerHTML = "Current date:" + the_date
+
+            } catch (error) {
+                console.error("Error: Weather data fetch failed:", error)
+            }
 
         })
     </script>
