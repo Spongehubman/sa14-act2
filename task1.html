@@ -16,11 +16,17 @@
         <button type="submit" id="submitButton">Obtain Data</button>
     </form>
 
-    <p id="forecast">5-Day Weather Forecast from <span id="location"></span>:</p>
-    <img src="" alt="">
     <br>
+    <p id="forecast">Today's Weather Forecast from <span id="location"></span>:</p>
     <p id="date"></p>
     <p id="time"></p>
+    <p id="temp"></p>
+    <p id="humidity"></p>
+    <br>
+
+    <p id="forecast2">5-Day Weather Forecast from <span id="location2"></span>:</p>
+    <img src="" alt="">
+    
 
     <script>
         document.getElementById("submitButton").addEventListener("click", async function fetchWeatherData() {
@@ -40,9 +46,12 @@
 
                 document.getElementById("location").innerHTML = cityValue
 
-                const the_date = data.get("forecast".get("forecastday"[0].get("date")))
+                const the_date = data["location"]["localtime"]
                 console.log(the_date)
-                document.getElementById("date").innerHTML = "Current date:" + the_date
+                document.getElementById("date").innerHTML = "Current date and time: " + the_date.slice(0, 10)
+                document.getElementById("time").innerHTML = "Current time: " + the_date.slice(11, 16)
+                document.getElementById("temp").innerHTML = "Current temperature: " + data["current"]["temp_f"] + " Degrees Fahrenheit."
+                document.getElementById("humidity").innerHTML = "Current humidity: " + data["current"]["humidity"]
 
             } catch (error) {
                 console.error("Error: Weather data fetch failed:", error)
