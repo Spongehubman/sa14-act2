@@ -4,6 +4,49 @@
         <title>Task 2</title>
     </head>
     <body>
-        <script></script>
+
+        <form id="converter">
+            <input list="convert_from">
+            <datalist id="convert_from">
+                <option value="USD"></option>
+                <option value="EUR"></option>
+                <option value="GBP"></option>
+            </datalist>
+            <input id="amount">
+            <input list="convert_to">
+            <datalist id="convert_to">
+                <option value="USD"></option>
+                <option value="EUR"></option>
+                <option value="GBP"></option>
+            </datalist>
+            <button id="submitButton">Convert amount!</button>
+        </form>
+        <script>
+
+            document.getElementById("submitButton").addEventListener("click", async function conversion() {
+                event.preventDefault()
+
+                try{
+                    event.preventDefault()
+                    const requestURL = `https://v6.exchangerate-api.com/v6/685f6e3f0f3446af96bd58be/latest/USD`
+
+                    const data = await fetch(requestURL).then(response => response.json())
+
+
+
+
+                } catch(error) {
+                    console.error('Error: data fetch failed. ', error)
+                }
+
+
+
+
+
+
+
+            })
+
+        </script>
     </body>
 </html>

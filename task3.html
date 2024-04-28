@@ -16,11 +16,17 @@
             <button type="submit" id="submitAdd" onClick="add">Add Task</button><br>
         </form>
 
-        <ul div id="output">
+        <div id="edit_section">
+
+        </div><br>
+
+
+        <ul id="output">
 
         </ul>
 
         <script>
+            const outputVar = document.getElementById("output")
             let checker = 1
             document.getElementById("submitAdd").addEventListener("click", add)
 
@@ -32,8 +38,16 @@
 
                 const item = document.createElement("li")
                 item.setAttribute("id", `item${checker}`)
-                var button = document.createElement("button")
-                button.setAttribute("")
+                var button1 = document.createElement("button")
+                var button2 = document.createElement("button")
+
+                button1.setAttribute("id", `edit_${checker}`)
+                button1.setAttribute("onClick", `edit(this.id)`)
+                button2.setAttribute("id", `remove_${checker}`)
+                button2.setAttribute("onClick", `remove(this.id)`)
+                
+                //let text = "Edit"
+                button1.setAttribute("value", "Edit")
 
                 const breaker = document.createElement("br")
                 const name = document.createTextNode(task + ": " + desc)
@@ -44,11 +58,26 @@
                 // Obtain the ID of the target element to output.
 
                 item.appendChild(name)
-                document.getElementById("output").appendChild(name)
-                document.getElementById("output").appendChild(breaker)
+                outputVar.appendChild(name)
+                outputVar.appendChild(button1)
+                outputVar.appendChild(button2)
+                outputVar.appendChild(breaker)
 
                 checker += 1
                 console.log(checker)
+            }
+
+            function edit(id) {
+                console.log("Connection successful!", id)
+                //const target = document.GetElementById(``)
+            }
+
+            function remove(id) {
+                console.log("Delete prevention!", id)
+                const target = id.slice(7, 8)
+                outputVar.removeChild(outputVar.children[(target * 4) - 1])
+
+                checker -= 1
             }
 
 
