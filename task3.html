@@ -31,7 +31,10 @@
                 var desc = document.getElementById("description").value
 
                 const item = document.createElement("li")
-                item.setAttribute("id", "item${checker}")
+                item.setAttribute("id", `item${checker}`)
+                var button = document.createElement("button")
+                button.setAttribute("")
+
                 const breaker = document.createElement("br")
                 const name = document.createTextNode(task + ": " + desc)
 
