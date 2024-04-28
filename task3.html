@@ -12,7 +12,7 @@
             <p>Task title:</p>
             <input type="text" id="title" name="title"> <br>
             <p>Description</p><br>
-            <input type="text" id="task" name="task"> <br>
+            <input type="text" id="description" name="task"> <br>
             <button type="submit" id="submitAdd" onClick="add">Add Task</button><br>
         </form>
 
@@ -20,6 +20,35 @@
 
         </ul>
 
-        <script src="task3_script.js"></script>
+        <script>
+            let checker = 1
+            document.getElementById("submitAdd").addEventListener("click", add)
+
+
+            function add() {
+                event.preventDefault()
+                var task = document.getElementById("title").value
+                var desc = document.getElementById("description").value
+
+                const item = document.createElement("li")
+                item.setAttribute("id", "item${checker}")
+                const breaker = document.createElement("br")
+                const name = document.createTextNode(task + ": " + desc)
+
+                console.log(task)
+                //responseElement.innerElement = task.value
+
+                // Obtain the ID of the target element to output.
+
+                item.appendChild(name)
+                document.getElementById("output").appendChild(name)
+                document.getElementById("output").appendChild(breaker)
+
+                checker += 1
+                console.log(checker)
+            }
+
+
+        </script>
     </body>
 </html>

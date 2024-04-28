@@ -25,7 +25,9 @@
     <br>
 
     <p id="forecast2">5-Day Weather Forecast from <span id="location2"></span>:</p>
-    <img src="" alt="">
+    <ul id="forecast_list">
+
+    </ul>
     
 
     <script>
@@ -52,6 +54,29 @@
                 document.getElementById("time").innerHTML = "Current time: " + the_date.slice(11, 16)
                 document.getElementById("temp").innerHTML = "Current temperature: " + data["current"]["temp_f"] + " Degrees Fahrenheit."
                 document.getElementById("humidity").innerHTML = "Current humidity: " + data["current"]["humidity"]
+
+
+                const un_list = document.getElementById("forecast_list")
+
+                for (let i = 0; i < 5; i++) {
+                    console.log("${i}")
+                    const list_item = document.createElement("li")
+                    //list_item.setAttribute("id", "${i + 1)")
+                    const day_forecast = document.createTextNode(data["forecast"]["forecastday"][(i * 24)])
+                    
+                    const text_time = data["forecast"]["forecastday"][i * 24]["time"]
+                    const text_temp = data["forecast"]["forecastday"][i * 24]["temp_f"]
+                    const text_humidity = data["forecast"]["forecastday"][i * 24]["humidity"]
+                    
+                    list_item.appendChild(text_time)
+                    document.getElementById("forecast_list").appendChild(list_item)
+
+                    
+                }
+
+
+
+
 
             } catch (error) {
                 console.error("Error: Weather data fetch failed:", error)
