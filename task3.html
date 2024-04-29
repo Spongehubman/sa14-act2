@@ -37,7 +37,7 @@
                 var desc = document.getElementById("description").value
                 const item_node = document.createElement("li")
                 var name = document.createTextNode(task + "- " + desc)
-                
+
                 item_node.appendChild(name)
                 item_node.setAttribute("id", `item_${checker}`)
                 outputVar.appendChild(item_node)
@@ -53,6 +53,7 @@
                 button1.setAttribute("value", "Edit")
 
                 const breaker = document.createElement("br")
+                breaker.setAttribute("id", `breakTag_${checker}`)
                 
 
                 console.log(task)
@@ -90,6 +91,7 @@
 
                 document.getElementById(`edit_${target}`).remove()
                 document.getElementById(`delete_${target}`).remove()
+                document.getElementById(`breakTag_${target}`).remove()
 
 
                 //for (let i = 0; i > outputVar.length; i++) {
@@ -101,7 +103,7 @@
                 //outputVar.removeChild(outputVar[1])
 
 
-                checker -= 1
+                //checker -= 1
             }
 
 
