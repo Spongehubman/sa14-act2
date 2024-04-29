@@ -4,22 +4,30 @@
         <title>Task 2</title>
     </head>
     <body>
-
+        <h1>Currency conversion tool using JavaScript</h1>
+        <br>
         <form id="converter">
-            <input id="from" list="convert_from">
+            <label for="from">Select a currency to convert from: </label><br>
+            <input id="from" name="from" list="convert_from">
             <datalist id="convert_from">
                 <option value="USD"></option>
                 <option value="EUR"></option>
                 <option value="GBP"></option>
             </datalist>
-            <input id="amount">
-            <input id="to" list="convert_to">
+            <br><br>
+
+            <label for="amount">Enter how much you would like to convert.</label><br>
+            <input type="text" name="amount" id="amount">
+            <br><br>
+
+            <label for="to">Select a currency to convert to:</label><br>
+            <input id="to" name="to" list="convert_to">
             <datalist id="convert_to">
                 <option value="USD"></option>
                 <option value="EUR"></option>
                 <option value="GBP"></option>
             </datalist>
-            <button id="submitButton">Convert amount!</button>
+            <button type="submit" id="submitButton">Convert amount!</button>
         </form>
 
         <p id="answer"></p>
@@ -34,21 +42,21 @@
 
                     const data = await fetch(requestURL).then(response => response.json())
 
-                    const first_from = getElementById("convert_from").value
-                    const second_to = getElementById("convert_to").value
+                    var first_from = document.getElementById("from").value
+                    var second_to = document.getElementById("to").value
 
+                    var amount = document.getElementById("amount").value
+                    console.log(first_from, second_to, amount)
 
+                    console.log(data["conversion_rates"])
+                    var result = (amount / data["conversion_rates"][first_from]) * data["conversion_rates"][second_to]
 
+                    const result_place = document.getElementById("answer")
+                    result_place.innerHTML = `${amount} in ${first_from} is equal to ${result} ${second_to}.`
 
                 } catch(error) {
                     console.error('Error: data fetch failed. ', error)
                 }
-
-
-
-
-
-
 
             })
 
