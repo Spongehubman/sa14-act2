@@ -35,30 +35,33 @@
                 event.preventDefault()
                 var task = document.getElementById("title").value
                 var desc = document.getElementById("description").value
+                const item_node = document.createElement("li")
+                var name = document.createTextNode(task + "- " + desc)
+                
+                item_node.appendChild(name)
+                item_node.setAttribute("id", `item_${checker}`)
+                outputVar.appendChild(item_node)
 
-                const item = document.createElement("li")
-                item.setAttribute("id", `item${checker}`)
                 var button1 = document.createElement("button")
                 var button2 = document.createElement("button")
 
                 button1.setAttribute("id", `edit_${checker}`)
-                button1.setAttribute("onClick", `edit(this.id)`)
-                button2.setAttribute("id", `remove_${checker}`)
-                button2.setAttribute("onClick", `remove(this.id)`)
+                button1.setAttribute("onClick", `item_edit(this.id)`)
+                button2.setAttribute("id", `delete_${checker}`)
+                button2.setAttribute("onClick", `item_delete(this.id)`)
                 
-                //let text = "Edit"
                 button1.setAttribute("value", "Edit")
 
                 const breaker = document.createElement("br")
-                const name = document.createTextNode(task + ": " + desc)
+                
 
                 console.log(task)
                 //responseElement.innerElement = task.value
 
                 // Obtain the ID of the target element to output.
 
-                item.appendChild(name)
-                outputVar.appendChild(name)
+                
+                
                 outputVar.appendChild(button1)
                 outputVar.appendChild(button2)
                 outputVar.appendChild(breaker)
@@ -67,7 +70,7 @@
                 console.log(checker)
             }
 
-            function edit(id) {
+            function item_edit(id) {
                 console.log("Edit activate!", id)
                 //const target = document.GetElementById(``)
 
@@ -75,17 +78,27 @@
 
             }
 
-            function remove(id) {
+            function item_delete(id) {
                 console.log("Delete activate!", id)
-                const target = id.slice(7, 8)
-                var base = document.getElementById(`item${target - 1}`)
+                var target = Number(id.slice(7, id.length))
+                //var base = document.getElementById(`item${target}`)
+                console.log(target)
 
-                for (let i = 0; i > 2; i++) {
-                    base 
-                    outputVar.removeChild(outputVar.children[target])
-                }
+                //document.getElementById(`edit_section`).remove()
+                document.getElementById(`item_${target}`).remove()
+                //document.getElementById(`item_${target}`).innerHTML = "Pending..."
 
-                outputVar.removeChild(outputVar.children[target])
+                document.getElementById(`edit_${target}`).remove()
+                document.getElementById(`delete_${target}`).remove()
+
+
+                //for (let i = 0; i > outputVar.length; i++) {
+                //    console.log(outputVar[i])
+                //base.removeChild()
+                //outputVar.removeChild(outputVar.children[target])
+                //}
+
+                //outputVar.removeChild(outputVar[1])
 
 
                 checker -= 1
