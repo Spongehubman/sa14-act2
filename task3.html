@@ -11,14 +11,14 @@
         <form id="addForm">
             <p>Task title:</p>
             <input type="text" id="title" name="title"> <br>
-            <p>Description</p><br>
+            <p>Description</p>
             <input type="text" id="description" name="task"> <br>
             <button type="submit" id="submitAdd" onClick="add">Add Task</button><br>
         </form>
 
-        <div id="edit_section">
+        <form id="edit_section">
 
-        </div><br>
+        </form><br>
 
 
         <ul id="output">
@@ -27,7 +27,7 @@
 
         <script>
             const outputVar = document.getElementById("output")
-            let checker = 1
+            let checker = 0
             document.getElementById("submitAdd").addEventListener("click", add)
 
 
@@ -68,14 +68,25 @@
             }
 
             function edit(id) {
-                console.log("Connection successful!", id)
+                console.log("Edit activate!", id)
                 //const target = document.GetElementById(``)
+
+
+
             }
 
             function remove(id) {
-                console.log("Delete prevention!", id)
+                console.log("Delete activate!", id)
                 const target = id.slice(7, 8)
-                outputVar.removeChild(outputVar.children[(target * 4) - 1])
+                var base = document.getElementById(`item${target - 1}`)
+
+                for (let i = 0; i > 2; i++) {
+                    base 
+                    outputVar.removeChild(outputVar.children[target])
+                }
+
+                outputVar.removeChild(outputVar.children[target])
+
 
                 checker -= 1
             }
