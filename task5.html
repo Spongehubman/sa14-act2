@@ -2,60 +2,86 @@
 <html>
 
 <head>
-    <title>SA-14, Act 2, Task 5</title>
+    <title>SA-14, Act 2, Task 5: Animation</title>
     <style>
-        /* div.moving{
+        #container{
             position: relative;
-            animation-name: move;
-            animation-duration: 3s;
+            width: 1200px;
+            height: 100px;
         }
 
-        @keyframes move{
-            from{ left: 0px;}
-            to { left: 200px;}
-        }*/
+        #moving{
+            position: absolute;
+
+        }
     </style>
 </head>
 
 
 <!-- This div block should move. -->
-<div class="moving">
-    <h2>Click the button below and see what it does!</h2>
+<div id="container">
+    <h2 id="moving">Click the button below and see what it does!</h2>
 
 </div>
 
-<button type="submit">Animate!</button>
+<button type="submit" id="submitButton" onClick="animate_text">Animate!</button>
 
 <script>
-    const div_element = document.getElementsByTagName("div")[0]
-    let clicked
-    clicked = false
+    document.getElementById("submitButton").addEventListener("click", animate_text)
+    const move = document.getElementById("moving")
+    var clicked = false
     console.log(clicked)
-    const button = document.getElementsByTagName("button")[0]
-    button.addEventListener("click", (event) => {
 
+    //const button = document.getElementById("submit")
+    //button.addEventListener("click", animate_text)
+    
+    function animate_text() {
         event.preventDefault()
-        moveable = div_element.style.left
+        var id = null
 
         if (clicked == false) {
-            for (let x = 0; x <= 250; x++) {
-                div_element.style.left += x
-                console.log(x)
-                //console.log(clicked)
-                const clicked = true
-                console.log(clicked)
-            }
-        } else if (clicked == true) {
-            for (let x = 250; x >= 1; x--) {
-                div_element.style.left -= x
-                console.log(x)
-                //console.log(clicked)
-                const clicked = false
-                console.log(clicked)
-            }
+            var pos = 0
+        } else {
+            var pos = 500
         }
 
-    })
+        clearInterval(id)
+        console.log(id)
+        id = setInterval(frame, 5)
+        console.log(id)
+
+        // It appears is if this function acts as if it were a continuous loop,
+        // which keeps going until "clearInterval(id)" is executed. The style of the
+        // selected "move" element is set to the value of "pos" plus the unit, making
+        // a concatenated string which can be received as a valid unit by the attribute.
+
+        function frame() {
+            if (clicked == false) {
+                if (pos == 500) {
+                    clearInterval(id)
+                    clicked = true
+                } else {
+                    pos++
+                    move.style.left = pos + "px"
+                    console.log(pos, id, "px", pos + "px", clicked)
+                }
+            } else if (clicked == true) {
+                //pos = 500
+                //move.style.left = 500
+
+                if (pos == 0) {
+                    clearInterval(id)
+                    clicked = false
+                } else {
+                    pos--
+                    move.style.left = pos + "px"
+                    console.log(pos, id, "px", pos + "px", clicked)
+                }
+            }
+            
+            console.log(pos, id)
+        }
+    }
 
 </script>
 </html>

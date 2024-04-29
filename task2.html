@@ -6,14 +6,14 @@
     <body>
 
         <form id="converter">
-            <input list="convert_from">
+            <input id="from" list="convert_from">
             <datalist id="convert_from">
                 <option value="USD"></option>
                 <option value="EUR"></option>
                 <option value="GBP"></option>
             </datalist>
             <input id="amount">
-            <input list="convert_to">
+            <input id="to" list="convert_to">
             <datalist id="convert_to">
                 <option value="USD"></option>
                 <option value="EUR"></option>
@@ -21,6 +21,8 @@
             </datalist>
             <button id="submitButton">Convert amount!</button>
         </form>
+
+        <p id="answer"></p>
         <script>
 
             document.getElementById("submitButton").addEventListener("click", async function conversion() {
@@ -31,6 +33,9 @@
                     const requestURL = `https://v6.exchangerate-api.com/v6/685f6e3f0f3446af96bd58be/latest/USD`
 
                     const data = await fetch(requestURL).then(response => response.json())
+
+                    const first_from = getElementById("convert_from").value
+                    const second_to = getElementById("convert_to").value
 
 
 
