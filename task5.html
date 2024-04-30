@@ -31,7 +31,7 @@
     const move = document.getElementById("moving")
     var clicked = false
     console.log(clicked)
-
+    var offset = 0
     //const button = document.getElementById("submit")
     //button.addEventListener("click", animate_text)
     
@@ -47,8 +47,9 @@
 
         clearInterval(id)
         console.log(id)
-        id = setInterval(frame, 5)
+        id = setInterval(frame, 35)
         console.log(id)
+        
 
         // It appears is if this function acts as if it were a continuous loop,
         // which keeps going until "clearInterval(id)" is executed. The style of the
@@ -57,25 +58,48 @@
 
         function frame() {
             if (clicked == false) {
-                if (pos == 500) {
+                if (pos >= 499) {
+                    offset = 0
                     clearInterval(id)
                     clicked = true
-                } else {
+                } else if (pos <= 249) {
+                    
                     pos++
                     move.style.left = pos + "px"
-                    console.log(pos, id, "px", pos + "px", clicked)
+                    console.log(pos, id, "px", pos + "px", clicked, offset)
+                    pos += offset
+                    offset++
+                       
+                } else if (pos >= 250 && pos < 499) {
+                    pos++
+                    move.style.left = pos + "px"
+                    pos += offset
+                    offset--
+
+
                 }
+
             } else if (clicked == true) {
                 //pos = 500
                 //move.style.left = 500
 
-                if (pos == 0) {
+                if (pos <= 0) {
+                    offset = 0
                     clearInterval(id)
                     clicked = false
-                } else {
+                } else if (pos >= 250) {
+
                     pos--
                     move.style.left = pos + "px"
                     console.log(pos, id, "px", pos + "px", clicked)
+                    pos -= offset
+                    offset++
+
+                } else if (pos <= 249 && pos > 0) {
+                    pos--
+                    move.style.left = pos + "px"
+                    pos -= offset
+                    offset--
                 }
             }
             
