@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <title>SA14, Act 2, Task 3: To-do List</title>
     </head>
 
     <body>
@@ -17,7 +17,13 @@
         </form>
 
         <form id="edit_section">
-
+            <p>Edit the properties of task <span id="edit_target"></span>.</p>
+            <p>Edit task title:</p>
+            <input type="text" id="edit_title" name="edit_title"> <br>
+            <p>Edit description:</p>
+            <input type="text" id="edit_desc" name="edit_desc"> <br>
+            <button type="submit" id="submitEdit" onClick="set_edit">Edit Task</button>
+            <span id="number" name="number"></span>
         </form><br>
 
 
@@ -29,7 +35,8 @@
             const outputVar = document.getElementById("output")
             let checker = 0
             document.getElementById("submitAdd").addEventListener("click", add)
-
+            document.getElementById("edit_section").style.visibility='hidden'
+            document.getElementById("submitEdit").addEventListener("click", set_edit)
 
             function add() {
                 event.preventDefault()
@@ -47,8 +54,13 @@
 
                 button1.setAttribute("id", `edit_${checker}`)
                 button1.setAttribute("onClick", `item_edit(this.id)`)
+                const editText = document.createTextNode("Edit")
+                button1.appendChild(editText)
+
                 button2.setAttribute("id", `delete_${checker}`)
                 button2.setAttribute("onClick", `item_delete(this.id)`)
+                const deleteText = document.createTextNode("Delete")
+                button2.appendChild(deleteText)
                 
                 button1.setAttribute("value", "Edit")
 
@@ -72,14 +84,31 @@
             }
 
             function item_edit(id) {
+                event.preventDefault()
                 console.log("Edit activate!", id)
-                //const target = document.GetElementById(``)
+                var target = Number(id.slice(5, id.length))
+                
+                document.getElementById("edit_section").style.visibility='visible'
+                document.getElementById("number").setAttribute("name", `number${target}`)
+                document.getElementById("edit_target").innerHTML = `${target + 1}`
 
+            }
 
+            function set_edit() {
+                event.preventDefault()
+                var extract_number = document.getElementById("number").name
+                console.log(extract_number)
+                
+                var target = Number(extract_number.slice(6, id.length))
+                document.getElementById("edit_section").style.visibility='hidden'
+                var new_name = document.getElementById("edit_title").value
+                var new_desc = document.getElementById("edit_desc").value
+                document.getElementById(`item_${target}`).innerHTML = new_name + "- " + new_desc
 
             }
 
             function item_delete(id) {
+                event.preventDefault()
                 console.log("Delete activate!", id)
                 var target = Number(id.slice(7, id.length))
                 //var base = document.getElementById(`item${target}`)
