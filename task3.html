@@ -34,6 +34,7 @@
         <script>
             const outputVar = document.getElementById("output")
             let checker = 0
+            let target = 0
             document.getElementById("submitAdd").addEventListener("click", add)
             document.getElementById("edit_section").style.visibility='hidden'
             document.getElementById("submitEdit").addEventListener("click", set_edit)
@@ -89,21 +90,25 @@
                 var target = Number(id.slice(5, id.length))
                 
                 document.getElementById("edit_section").style.visibility='visible'
-                document.getElementById("number").setAttribute("name", `number${target}`)
+                document.getElementById("number").setAttribute("id", `number${target}`)
                 document.getElementById("edit_target").innerHTML = `${target + 1}`
 
             }
 
             function set_edit() {
                 event.preventDefault()
-                var extract_number = document.getElementById("number").name
-                console.log(extract_number)
+                var extract_number = document.getElementById(`number${target}`)
+                //console.log(extract_number)
                 
-                var target = Number(extract_number.slice(6, id.length))
+                //var target = Number(extract_number.slice(6, id.length))
                 document.getElementById("edit_section").style.visibility='hidden'
                 var new_name = document.getElementById("edit_title").value
                 var new_desc = document.getElementById("edit_desc").value
-                document.getElementById(`item_${target}`).innerHTML = new_name + "- " + new_desc
+
+
+                new_info = document.createTextNode(new_name + "- " + new_desc)
+                var target_node = document.getElementById(`item_${target}`)
+                target_node.replaceChild(new_info, target_node.childNodes[0])
 
             }
 
